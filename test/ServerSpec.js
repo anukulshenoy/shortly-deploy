@@ -11,7 +11,7 @@ var Link = require('../app/models/link');
 // NOTE: these tests are designed for mongo!
 /////////////////////////////////////////////////////
 
-xdescribe('', function() {
+describe('', function() {
 
   beforeEach(function(done) {
     // Log out currently signed in user
@@ -28,7 +28,7 @@ xdescribe('', function() {
       });
   });
 
-  xdescribe('Link creation: ', function() {
+  describe('Link creation: ', function() {
 
     it('Only shortens valid urls, returning a 404 - Not found for invalid urls', function(done) {
       request(app)
@@ -39,7 +39,7 @@ xdescribe('', function() {
         .end(done);
     });
 
-    xdescribe('Shortening links:', function() {
+    describe('Shortening links:', function() {
 
       it('Responds with the short code', function(done) {
         request(app)
@@ -88,7 +88,7 @@ xdescribe('', function() {
 
     }); // 'Shortening Links'
 
-    xdescribe('With previously saved urls: ', function() {
+    describe('With previously saved urls: ', function() {
 
       beforeEach(function(done) {
         link = new Link({
@@ -169,7 +169,7 @@ xdescribe('', function() {
 
   }); // 'Privileged Access'
 
-  describe('Account Creation:', function() {
+  xdescribe('Account Creation:', function() {
 
     it('Signup creates a new user', function(done) {
       request(app)
@@ -181,6 +181,7 @@ xdescribe('', function() {
         .expect(function() {
           User.findOne({'username': 'Svnh'})
             .exec(function(err, user) {
+              console.log(user.username, 'THIS IS THE USER IN THE TEST');
               expect(user.username).to.equal('Svnh');
             });
         })
